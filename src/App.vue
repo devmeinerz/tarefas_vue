@@ -16,8 +16,10 @@ export default {
 </script>
 
 <style scoped>
+
 #app header{
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  font-family: Roboto Condensed, sans-serif;
+  font-weight: bold;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;

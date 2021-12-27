@@ -4,7 +4,10 @@
       <input type="text" placeholder="Tarefa de hoje:" v-model="tarefa" />
       <button type="submit">Adicionar</button>
     </form>
-    <Item :Lista="tarefas"/>
+    <Item :lista="tarefas" :delete="deleteTask" />
+    <span class="contTarefas" v-show="tarefas.length > 0">
+      Você tem <strong :class="{ pend: pendente }">{{ tarefas.length }}</strong> tarefas pendentes.
+    </span>
   </div>
 </template>
 
@@ -19,13 +22,14 @@ export default {
     return {
       tarefa: "",
       tarefas: [],
+      pendente: false,
     };
   },
   methods: {
     addItem(a) {
       a.preventDefault();
       if (this.tarefa == "") {
-        alert("Preencha os campos abaixo");
+        alert("Digite sua tarefa");
         return;
       } else {
         this.tarefas.push({
@@ -35,6 +39,26 @@ export default {
       }
       this.tarefa = "";
     },
+    deleteTask(key) {
+      let filtro = this.tarefas.filter((item) => {
+        return item.key !== key;
+      });
+      return (this.tarefas = filtro);
+    },
+  },
+  watch: {
+    tarefas: {
+      deep: true,
+      handler() {
+        localStorage.setItem("tasks", JSON.stringify(this.tarefas));
+        this.tarefas.length >= 4 ? this.pendente = true : this.pendente = false;
+      },
+    },
+  },
+  created() {
+    //chama dados no stored quando a aplicação vue é iniciada
+    const json = localStorage.getItem("tasks");
+    this.tarefas = JSON.parse(json) || [];
   },
 };
 </script>
@@ -72,5 +96,11 @@ form button {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+.pend{
+  color: #ff0000;
+}
+.contTarefas{
+  font-family: Roboto Condensed, sans-serif;
 }
 </style>

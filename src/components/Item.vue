@@ -2,8 +2,8 @@
   <div id="item">
     <ul>
       <li v-for="task in lista" :key="task.key">
-        <span>{{task.text}}</span>
-        <button>Concluir</button>
+        <span>{{ task.text }}</span>
+        <button @click="deleteItem(task.key)">Concluir</button>
       </li>
     </ul>
   </div>
@@ -12,10 +12,13 @@
 <script>
 export default {
   name: "Item",
-  props:[
-      'lista'
-  ]
-}
+  props: ["lista", "delete"],
+  methods: {
+    deleteItem(key){
+      this.delete(key);
+    },
+  },
+};
 </script>
 
 <style scoped>
@@ -35,8 +38,8 @@ ul li {
   align-items: center;
   justify-content: space-between;
 }
-li:not(:first-child){
-    border-top: 2px solid #eee;
+li:not(:first-child) {
+  border-top: 2px solid #eee;
 }
 span {
   font-family: Avenir, Helvetica, Arial, sans-serif;
