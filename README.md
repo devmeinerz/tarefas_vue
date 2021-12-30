@@ -6,5 +6,5 @@ Implementação de estados de armazenamento de dados usando handler e created (p
 ##
 <a href="https://tarefas-raul-meinerz.netlify.app/" target="_blank">Acessar<a/>
 
-![demo](https://github.com/devmeinerz/tarefas_vue/blob/main/src/assets/images/cover.png?raw=true)<br/>
+![demo](https://github.com/devmeinerz/tarefas_vue/blob/main/src/assets/images/cover_app.png?raw=true)<br/>
 
